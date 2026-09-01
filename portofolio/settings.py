@@ -14,7 +14,13 @@ SECRET_KEY = 'django-insecure-p*l5kig&@wai3@zk_-x!3jk*@_z+p6bk)(v+-6k8!=_99*t68r
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "hafizh-zuhdi-myportofolio.pws.cs.ui.ac.id"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "hafizh-zuhdi-myportofolio.pws.cs.ui.ac.id",
+    "*.pws.cs.ui.ac.id",
+]
+
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 
 INSTALLED_APPS = [
@@ -24,10 +30,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',  # App portofolio kamu
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,7 +48,7 @@ ROOT_URLCONF = 'portofolio.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND': 'django.template.backends.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -100,8 +108,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+WHITENOISE_USE_FINDERS = True
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://hafizh-zuhdi-myportofolio.pws.cs.ui.ac.id",
+    "http://hafizh-zuhdi-myportofolio.pws.cs.ui.ac.id",
+]
 
 MAILERS = {
     'default': {
