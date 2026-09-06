@@ -96,7 +96,7 @@
             </div>
         </section>
 
-        <!-- Section Skills Interaktif (Model Accordion) -->
+        <!-- Section Skills Interaktif -->
         <section class="content-section" id="skills">
             <div class="container">
                 <h2 class="section-title">Skills & Expertise</h2>
@@ -161,5 +161,30 @@
             <p>&copy; 2026 Hafizh Zuhdi Hartanto. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
+
+    <!-- Script JavaScript untuk memicu animasi geser berulang saat discroll -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.edu-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
