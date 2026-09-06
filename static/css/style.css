@@ -5,19 +5,22 @@
 }
 
 :root {
-    --ink: #1c1917;
-    --paper: #faf6f0;
-    --accent: #d95d39;
-    --accent-dark: #a8442a;
-    --line: #e3d9c9;
-    --text-muted: #6b6459;
-    --radius: 4px;
+    --ink: #f3f4f6;
+    --paper-gradient: linear-gradient(135deg, #090d16 0%, #111827 50%, #180b12 100%);
+    --card-bg: rgba(17, 24, 39, 0.85);
+    --accent-blue: #38bdf8;
+    --accent-red: #f43f5e;
+    --line: rgba(55, 65, 81, 0.6);
+    --text-muted: #9ca3af;
+    --radius: 8px;
 }
 
 body {
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--ink);
-    background-color: var(--paper);
+    background: var(--paper-gradient);
+    background-attachment: fixed;
+    min-height: 100vh;
     line-height: 1.6;
 }
 
@@ -33,6 +36,11 @@ h1, .brand {
 
 .site-header {
     border-bottom: 1px solid var(--line);
+    background: rgba(9, 13, 22, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .site-header .container {
@@ -47,6 +55,9 @@ h1, .brand {
     font-weight: 700;
     color: var(--ink);
     text-decoration: none;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .site-header nav {
@@ -55,9 +66,14 @@ h1, .brand {
 }
 
 .site-header nav a {
-    color: var(--ink);
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.site-header nav a:hover {
+    color: var(--accent-blue);
 }
 
 .hero {
@@ -85,7 +101,7 @@ h1, .brand {
     font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent-dark);
+    color: var(--accent-blue);
     font-weight: 700;
     margin-bottom: 0.75rem;
 }
@@ -93,6 +109,9 @@ h1, .brand {
 .hero-identity h1 {
     font-size: clamp(3rem, 7vw, 5rem);
     line-height: 0.95;
+    background: linear-gradient(135deg, #ffffff 30%, var(--accent-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .bio {
@@ -117,6 +136,7 @@ h1, .brand {
 
 .meta-row dd {
     font-weight: 600;
+    color: var(--ink);
 }
 
 .social-links {
@@ -130,15 +150,17 @@ h1, .brand {
     font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
-    color: var(--paper);
-    background-color: var(--ink);
+    color: #ffffff;
+    background: linear-gradient(135deg, #1f2937, #111827);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 0.5rem 1.1rem;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .social-link:hover {
-    background-color: var(--accent);
+    border-color: var(--accent-blue);
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
 }
 
 .hero-photo {
@@ -153,9 +175,10 @@ h1, .brand {
     left: 1.25rem;
     width: 100%;
     height: 100%;
-    background-color: var(--accent);
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
     border-radius: var(--radius);
     z-index: 0;
+    opacity: 0.8;
 }
 
 .avatar {
@@ -166,7 +189,7 @@ h1, .brand {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: var(--radius);
-    border: 3px solid var(--ink);
+    border: 3px solid #1f2937;
 }
 
 .content-section {
@@ -191,11 +214,11 @@ h1, .brand {
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: var(--accent);
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-red));
     border-radius: var(--radius);
 }
 
-/* Styling Riwayat Pendidikan Interaktif (Accordion Style) */
+/* Accordion Card Style */
 .edu-list {
     display: flex;
     flex-direction: column;
@@ -203,16 +226,17 @@ h1, .brand {
 }
 
 .edu-card {
-    background-color: #ffffff;
+    background-color: var(--card-bg);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     overflow: hidden;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
 }
 
 .edu-card:hover {
-    border-color: var(--ink);
-    box-shadow: 4px 4px 0px var(--ink);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
 }
 
 .edu-summary {
@@ -221,10 +245,9 @@ h1, .brand {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    list-style: none; /* Menghilangkan panah default browser */
+    list-style: none;
 }
 
-/* Menghilangkan marker default di beberapa browser */
 .edu-summary::-webkit-details-marker {
     display: none;
 }
@@ -244,20 +267,19 @@ h1, .brand {
 
 .edu-icon {
     font-size: 0.9rem;
-    color: var(--accent);
+    color: var(--accent-blue);
     transition: transform 0.3s ease;
 }
 
-/* Memutar ikon panah ketika card dibuka */
 .edu-card[open] .edu-icon {
     transform: rotate(180deg);
+    color: var(--accent-red);
 }
 
 .edu-details-content {
     padding: 0 1.5rem 1.25rem 1.5rem;
     border-top: 1px dashed var(--line);
     margin-top: 0.5rem;
-    animation: fadeIn 0.3s ease-in-out;
 }
 
 .edu-details-content ul {
@@ -272,52 +294,13 @@ h1, .brand {
     margin-bottom: 0.4rem;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Projects Grid Style */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-}
-
-.info-card {
-    background-color: #ffffff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    position: relative;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.info-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--ink);
-    box-shadow: 4px 4px 0px var(--ink);
-}
-
-.info-card h3 {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-}
-
-.info-card p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
 .site-footer {
     padding: 1.5rem;
     color: var(--text-muted);
     font-size: 0.85rem;
     border-top: 1px solid var(--line);
+    text-align: center;
+    background: rgba(9, 13, 22, 0.9);
 }
 
 @media (max-width: 600px) {
@@ -339,9 +322,5 @@ h1, .brand {
 
     .content-section {
         padding: 2.5rem 0;
-    }
-
-    .card-grid {
-        grid-template-columns: 1fr;
     }
 }
