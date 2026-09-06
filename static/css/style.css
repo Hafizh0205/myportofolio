@@ -195,6 +195,89 @@ h1, .brand {
     border-radius: var(--radius);
 }
 
+/* Styling Riwayat Pendidikan Interaktif (Accordion Style) */
+.edu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.edu-card {
+    background-color: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edu-card:hover {
+    border-color: var(--ink);
+    box-shadow: 4px 4px 0px var(--ink);
+}
+
+.edu-summary {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    list-style: none; /* Menghilangkan panah default browser */
+}
+
+/* Menghilangkan marker default di beberapa browser */
+.edu-summary::-webkit-details-marker {
+    display: none;
+}
+
+.edu-header-info h3 {
+    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+}
+
+.edu-header-info p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.edu-icon {
+    font-size: 0.9rem;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+}
+
+/* Memutar ikon panah ketika card dibuka */
+.edu-card[open] .edu-icon {
+    transform: rotate(180deg);
+}
+
+.edu-details-content {
+    padding: 0 1.5rem 1.25rem 1.5rem;
+    border-top: 1px dashed var(--line);
+    margin-top: 0.5rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.edu-details-content ul {
+    list-style-type: disc;
+    padding-left: 1.2rem;
+    margin-top: 0.75rem;
+}
+
+.edu-details-content li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Projects Grid Style */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
