@@ -3,19 +3,24 @@ from main.models import Experience
 
 def show_main(request):
     context = {
-        "name": "Hafizh Zuhdi Hartanto",
-        "npm": "2506656785",
-        "study_program": "S1 Ilmu Komputer",
-        "bio": (
-            "Mahasiswa Ilmu Komputer Universitas Indonesia yang tertarik "
-            "pada cloud computing, backend infrastructure, dan digital systems."
-        ),
+        'name': 'Hafizh Zuhdi Hartanto',
+        'npm': '2506656785',
+        'study_program': 'S1 Ilmu Komputer',
+        'bio': 'Undergraduate Computer Science student at Fasilkom UI, passionate about technology, operating systems, and software engineering.',
     }
-    return render(request, "index.html", context)
+    return render(request, 'index.html', context)
 
 def show_experience(request):
+    if not Experience.objects.exists():
+        Experience.objects.create(
+            title="Asisten Dosen PBP",
+            description="Membantu mahasiswa memahami dasar pengembangan web.",
+            category="part-time",
+            is_ongoing=True
+        )
+        
+    experience_list = Experience.objects.all()
     context = {
-        "name": "Hafizh Zuhdi Hartanto",
-        "experience_list": Experience.objects.all(),
+        'experience_list': experience_list,
     }
-    return render(request, "experience.html", context)
+    return render(request, 'experience.html', context)
