@@ -15,8 +15,7 @@ def show_experience(request):
         Experience.objects.create(
             title="Asisten Dosen PBP",
             description="Membantu mahasiswa memahami dasar pengembangan web.",
-            category="part-time",
-            is_ongoing=True
+            category="part-time"
         )
         
     experience_list = Experience.objects.all()
