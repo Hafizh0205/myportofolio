@@ -1,0 +1,26 @@
+[
+{
+  "model": "main.experience",
+  "pk": "370c2b8f-f5bf-4f37-aa01-9de088b5d505",
+  "fields": {
+    "title": "Asisten Dosen PBP",
+    "description": "Membantu mahasiswa memahami dasar pengembangan web.",
+    "category": "part-time",
+    "thumbnail": null,
+    "started_at": "2026-09-08T13:50:56.475Z",
+    "ended_at": null
+  }
+},
+{
+  "model": "main.experience",
+  "pk": "6342ebd2-cfc0-49dd-8dec-68fbf59cf56c",
+  "fields": {
+    "title": "Asisten Dosen PBP",
+    "description": "Membantu mahasiswa memahami dasar pengembangan web.",
+    "category": "part-time",
+    "thumbnail": null,
+    "started_at": "2026-09-08T14:03:46.804Z",
+    "ended_at": null
+  }
+}
+]
