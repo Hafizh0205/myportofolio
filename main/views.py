@@ -11,13 +11,6 @@ def show_main(request):
     return render(request, 'index.html', context)
 
 def show_experience(request):
-    if not Experience.objects.exists():
-        Experience.objects.create(
-            title="Staff Departemen Olahraga BEM Fasilkom UI",
-            description="PJ UKOR Tenis Lapangan dan PJ Kontingen CSUI untuk ajang Olimpiade UI.",
-            category="organization"
-        )
-
     experience_list = Experience.objects.all()
     context = {
         'experience_list': experience_list,
