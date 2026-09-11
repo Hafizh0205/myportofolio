@@ -1,30 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Hafizh Zuhdi Hartanto Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="{% url 'main:show_main' %}" class="brand">Hafizh Zuhdi Hartanto</a>
+            <nav>
+                <a href="{% url 'main:show_main' %}#profile">Profile</a>
+                <a href="{% url 'main:show_main' %}#education">Education</a>
+                <a href="{% url 'main:show_main' %}#skills">Skills</a>
+                <a href="{% url 'main:show_experience' %}">Experience</a>
+                <a href="{% url 'main:show_projects' %}">Projects</a>
+            </nav>
+        </div>
+    </header>
+
     <main>
-        <section class="experience-section" id="experience">
+        <section class="content-section" id="experience">
             <div class="container">
-                <p class="section-kicker">Perjalanan saya sejauh ini</p>
-                <h1>Experience</h1>
-                <div class="experience-grid">
-                    {% for experience in experience_list %}
-                    <article class="experience-card">
-                        <span class="experience-category">
-                            {{ experience.category }}
-                        </span>
-                        <h2>{{ experience.title }}</h2>
-                        <p class="experience-description">
-                            {{ experience.description }}
-                        </p>
-                        {% if experience.ended_at %}
-                        <p class="experience-status">Selesai</p>
-                        {% else %}
-                        <p class="experience-status">Sedang berlangsung</p>
-                        {% endif %}
-                    </article>
-                    {% empty %}
-                    <p class="empty-state">
-                        Belum ada pengalaman yang ditambahkan.
-                    </p>
+                <p class="section-kicker">Perjalanan & Pengalaman</p>
+                <h2 class="section-title">Organizational Experience</h2>
+                <div class="edu-list">
+                    
+                    <details class="edu-card" open>
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>Staff Departemen Olahraga BEM Fasilkom UI 2026</h3>
+                                <p>Organization &bull; Sedang Berlangsung</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <ul>
+                                <li>Aktif berkontribusi sebagai Staff Departemen Olahraga (Depor) BEM Fasilkom UI 2026.</li>
+                                <li>Penanggung jawab / Pemegang Unit Kegiatan Olahraga (UKOR) Tenis Lapangan.</li>
+                                <li>Terlibat langsung dalam perencanaan dan pelaksanaan program kerja Olimpiade Universitas Indonesia (Olim UI).</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    {% for exp in experience_list %}
+                    <details class="edu-card">
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>{{ exp.title }}</h3>
+                                <p>{{ exp.category }} &bull; {% if exp.is_ongoing %}Sedang berlangsung{% else %}Selesai{% endif %}</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <p>{{ exp.description }}</p>
+                        </div>
+                    </details>
                     {% endfor %}
+
                 </div>
             </div>
         </section>
     </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Hafizh Zuhdi Hartanto. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.edu-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
