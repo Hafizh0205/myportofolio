@@ -45,6 +45,22 @@
                             </ul>
                         </div>
                     </details>
+
+                    {% for exp in experience_list %}
+                    <details class="edu-card">
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>{{ exp.title }}</h3>
+                                <p>{{ exp.category }} &bull; {% if exp.is_ongoing %}Sedang berlangsung{% else %}Selesai{% endif %}</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <p>{{ exp.description }}</p>
+                        </div>
+                    </details>
+                    {% endfor %}
+
                 </div>
             </div>
         </section>
