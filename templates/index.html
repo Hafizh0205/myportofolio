@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experience - Hafizh Zuhdi Hartanto Portfolio</title>
+    <title>Hafizh Zuhdi Hartanto Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -14,59 +14,146 @@
         <div class="container">
             <a href="{% url 'main:show_main' %}" class="brand">Hafizh Zuhdi Hartanto</a>
             <nav>
-                <a href="{% url 'main:show_main' %}#profile">Profile</a>
-                <a href="{% url 'main:show_main' %}#education">Education</a>
-                <a href="{% url 'main:show_main' %}#skills">Skills</a>
-                <a href="{% url 'main:show_projects' %}">Projects</a>
+                <a href="#profile">Profile</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
                 <a href="{% url 'main:show_experience' %}">Experience</a>
+
+                <a href="{% url 'main:show_projects' %}">Projects</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="experience-section">
+        <section class="hero" id="profile">
+            <div class="container hero-grid">
+                <div class="hero-identity">
+                    <p class="hero-kicker">Computer Science &middot; Universitas Indonesia</p>
+                    <h1>Hafizh Zuhdi Hartanto</h1>
+                </div>
+                <div class="hero-photo">
+                    <div class="photo-block"></div>
+                    <img class="avatar" src="/static/img/Hafizh.jpeg" alt="Photo of Hafizh Zuhdi Hartanto">
+                </div>
+                <div class="hero-details">
+                    <p class="bio">Undergraduate Computer Science student at Fasilkom UI, passionate about technology, operating systems, and software engineering. This portfolio is a collection of what I’ve learned, built, and experienced along the way.</p>
+                    <dl class="meta-list">
+                        <div class="meta-row">
+                            <dt>NPM</dt>
+                            <dd>2506656785</dd>
+                        </div>
+                        <div class="meta-row">
+                            <dt>Program</dt>
+                            <dd>S1 Ilmu Komputer</dd>
+                        </div>
+                    </dl>
+                    <div class="social-links">
+                        <a href="https://github.com/Hafizh0205" class="social-link">GitHub</a>
+                        <a href="https://www.linkedin.com/in/hafizh-zuhdi-hartanto-763b03365" class="social-link">LinkedIn</a>
+                        <a href="mailto:Hafzhproboy12@gmail.com" class="social-link">Email</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Riwayat Pendidikan -->
+        <section class="content-section" id="education">
             <div class="container">
-                <p class="section-kicker">Perjalanan & Pengalaman</p>
-                <h1>Work & Organizational Experience</h1>
-                <div class="experience-grid">
+                <h2 class="section-title">Education</h2>
+                <div class="edu-list">
+                    <details class="edu-card">
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>Universitas Indonesia (UI)</h3>
+                                <p>S1 Ilmu Komputer &bull; 2025 - Sekarang</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <ul>
+                                <li>Aktif mengikuti perkuliahan dan pendalaman bidang Computer Science, Cloud, dan Operating Systems.</li>
+                                <li>Eksplorasi pemrograman Python, C++, serta perancangan logika sistem digital.</li>
+                                <li>Aktif berpartisipasi dalam kepanitiaan fakultas (Open House Fasilkom UI & Social Project).</li>
+                            </ul>
+                        </div>
+                    </details>
 
-                    <article class="experience-card">
-                        <span class="experience-category">Organization</span>
-                        <h2>Staff Departemen Olahraga BEM Fasilkom UI 2025</h2>
-                        <p class="experience-description">
-                            Aktif berkontribusi dalam perencanaan, koordinasi, dan eksekusi berbagai kegiatan serta program kerja keolahragaan untuk seluruh mahasiswa Fasilkom UI.
-                        </p>
-                        <p class="experience-status">
-                            <span class="badge badge-ongoing">Sedang berlangsung</span>
-                        </p>
-                    </article>
+                    <details class="edu-card">
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>SMAN 1 Bekasi</h3>
+                                <p>MIPA / IPA &bull; 2022 - 2025</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <ul>
+                                <li>Lulusan SMAN 1 Bekasi angkatan 2025.</li>
+                                <li>Aktif dalam ekstrakurikuler Cycom serta kompetisi e-sports tingkat nasional.</li>
+                                <li>Meraih Juara Satu Olimpiade TIK-Informatika Nasional (OTN) kategori E-sport 2023.</li>
+                                <li>Meraih Juara Dua Cyber Competition XV 2024 se-Jawa Barat dan DKI Jakarta.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
 
-                    <article class="experience-card">
-                        <span class="experience-category">Academic</span>
-                        <h2>Asisten Dosen Pemrograman Berbasis Platform (PBP)</h2>
-                        <p class="experience-description">
-                            Membantu mahasiswa Fasilkom UI dalam memahami konsep dasar web development, kerangka kerja Django, REST API, serta membimbing jalannya praktikum mingguan.
-                        </p>
-                        <p class="experience-status">
-                            <span class="badge badge-ongoing">Sedang berlangsung</span>
-                        </p>
-                    </article>
+        <!-- Section Skills Interaktif -->
+        <section class="content-section" id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="edu-list">
+                    <details class="edu-card">
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>Basic Programming & Logic</h3>
+                                <p>DDP 1 &bull; Prosedural & Algoritma</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <ul>
+                                <li>Pemahaman dasar pemrograman prosedural dan pemecahan masalah (problem solving).</li>
+                                <li>Penerapan pengkondisian (if-else) dan perulangan (looping) secara efisien.</li>
+                                <li>Implementasi logika dasar menggunakan bahasa pemrograman Python.</li>
+                            </ul>
+                        </div>
+                    </details>
 
-                    {% for exp in experience_list %}
-                    <article class="experience-card">
-                        <span class="experience-category">{{ exp.category }}</span>
-                        <h2>{{ exp.title }}</h2>
-                        <p class="experience-description">{{ exp.description }}</p>
-                        <p class="experience-status">
-                            {% if exp.is_ongoing %}
-                            <span class="badge badge-ongoing">Sedang berlangsung</span>
-                            {% else %}
-                            <span class="badge badge-completed">Selesai</span>
-                            {% endif %}
-                        </p>
-                    </article>
-                    {% endfor %}
+                    <details class="edu-card">
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>Object-Oriented Programming (OOP)</h3>
+                                <p>DDP 1 &bull; Paradigma Berorientasi Objek</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <ul>
+                                <li>Penerapan konsep dasar OOP seperti Class dan Object dalam pengembangan program.</li>
+                                <li>Penggunaan prinsip Inheritance (Pewarisan) dan Encapsulation (Enkapsulasi).</li>
+                                <li>Pengelolaan struktur data berbasis objek yang modular di Python.</li>
+                            </ul>
+                        </div>
+                    </details>
 
+                    <details class="edu-card">
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>Digital Systems & Logic Design</h3>
+                                <p>PSD &bull; Hardware & Sirkuit Logika</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <ul>
+                                <li>Perancangan dan analisis sirkuit logika kombinasional serta sekuensial.</li>
+                                <li>Penggunaan komponen multiplexer, decoder, dan register.</li>
+                                <li>Simulasi perancangan Finite State Machine (FSM) menggunakan Logisim-Evolution.</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
             </div>
         </section>
@@ -77,5 +164,30 @@
             <p>&copy; 2026 Hafizh Zuhdi Hartanto. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
+
+    <!-- Script JavaScript untuk memicu animasi geser berulang saat discroll -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.edu-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
