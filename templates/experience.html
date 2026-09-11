@@ -24,31 +24,49 @@
     </header>
 
     <main>
-        <section class="experience-section" id="experience">
+        <section class="experience-section">
             <div class="container">
-                <p class="section-kicker">Perjalanan saya sejauh ini</p>
-                <h1>Experience</h1>
+                <p class="section-kicker">Perjalanan & Pengalaman</p>
+                <h1>Work & Organizational Experience</h1>
                 <div class="experience-grid">
-                    {% for experience in experience_list %}
+
                     <article class="experience-card">
-                        <span class="experience-category">
-                            {{ experience.get_category_display }}
-                        </span>
-                        <h2>{{ experience.title }}</h2>
+                        <span class="experience-category">Organization</span>
+                        <h2>Staff Departemen Olahraga BEM Fasilkom UI 2025</h2>
                         <p class="experience-description">
-                            {{ experience.description }}
+                            Aktif berkontribusi dalam perencanaan, koordinasi, dan eksekusi berbagai kegiatan serta program kerja keolahragaan untuk seluruh mahasiswa Fasilkom UI.
                         </p>
-                        {% if experience.is_ongoing %}
-                        <p class="experience-status">Sedang berlangsung</p>
-                        {% else %}
-                        <p class="experience-status">Selesai</p>
-                        {% endif %}
+                        <p class="experience-status">
+                            <span class="badge badge-ongoing">Sedang berlangsung</span>
+                        </p>
                     </article>
-                    {% empty %}
-                    <p class="empty-state">
-                        Belum ada pengalaman yang ditambahkan.
-                    </p>
+
+                    <article class="experience-card">
+                        <span class="experience-category">Academic</span>
+                        <h2>Asisten Dosen Pemrograman Berbasis Platform (PBP)</h2>
+                        <p class="experience-description">
+                            Membantu mahasiswa Fasilkom UI dalam memahami konsep dasar web development, kerangka kerja Django, REST API, serta membimbing jalannya praktikum mingguan.
+                        </p>
+                        <p class="experience-status">
+                            <span class="badge badge-ongoing">Sedang berlangsung</span>
+                        </p>
+                    </article>
+
+                    {% for exp in experience_list %}
+                    <article class="experience-card">
+                        <span class="experience-category">{{ exp.category }}</span>
+                        <h2>{{ exp.title }}</h2>
+                        <p class="experience-description">{{ exp.description }}</p>
+                        <p class="experience-status">
+                            {% if exp.is_ongoing %}
+                            <span class="badge badge-ongoing">Sedang berlangsung</span>
+                            {% else %}
+                            <span class="badge badge-completed">Selesai</span>
+                            {% endif %}
+                        </p>
+                    </article>
                     {% endfor %}
+
                 </div>
             </div>
         </section>
