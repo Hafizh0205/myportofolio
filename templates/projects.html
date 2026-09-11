@@ -24,21 +24,29 @@
     </header>
 
     <main>
-        <section class="experience-section" id="projects">
+        <section class="content-section" id="projects">
             <div class="container">
                 <p class="section-kicker">Hasil Karya & Proyek</p>
-                <h1>Featured Projects</h1>
-                <div class="experience-grid">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="edu-list">
                     {% for project in project_list %}
-                    <article class="experience-card">
-                        <span class="experience-category">
-                            {{ project.tech_stack }}
-                        </span>
-                        <h2>{{ project.title }}</h2>
-                        <p class="experience-description">
-                            {{ project.description }}
-                        </p>
-                    </article>
+                    <details class="edu-card">
+                        <summary class="edu-summary">
+                            <div class="edu-header-info">
+                                <h3>{{ project.title }}</h3>
+                                <p>{{ project.tech_stack }}</p>
+                            </div>
+                            <span class="edu-icon">&#9660;</span>
+                        </summary>
+                        <div class="edu-details-content">
+                            <p>{{ project.description }}</p>
+                            {% if project.project_url %}
+                            <p style="margin-top: 0.75rem;">
+                                <a href="{{ project.project_url }}" class="social-link" target="_blank" rel="noopener">Lihat Proyek</a>
+                            </p>
+                            {% endif %}
+                        </div>
+                    </details>
                     {% empty %}
                     <p class="empty-state">
                         Belum ada proyek yang ditambahkan.
@@ -54,5 +62,29 @@
             <p>&copy; 2026 Hafizh Zuhdi Hartanto. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.edu-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
