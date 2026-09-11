@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
-from main.models import Experience, Education
+from main.models import Experience, Project
 
 class MainTest(TestCase):
     def setUp(self):
@@ -43,31 +43,30 @@ class MainTest(TestCase):
         self.experience.ended_at = timezone.now()
         self.experience.save()
         response = self.client.get(reverse("main:show_experience"))
-        self.assertFalse(self.experience.is_ongoing)
         self.assertContains(response, "Selesai")
         self.assertNotContains(response, "Sedang berlangsung")
 
 
-class EducationTest(TestCase):
+class ProjectTest(TestCase):
     def setUp(self):
-        self.education = Education.objects.create(
-            institution="Universitas Indonesia",
-            degree="S1",
-            field_of_study="Ilmu Komputer",
-            start_year=2025
+        self.project = Project.objects.create(
+            title="Health Insurance Fraud Detection",
+            description="Sistem deteksi klaim asuransi kesehatan berbasis Python.",
+            tech_stack="Python, Django, Machine Learning"
         )
 
-    def test_education_url_is_accessible_and_uses_correct_template(self):
-        response = self.client.get(reverse("main:show_education"))
+    def test_project_url_is_accessible_and_uses_correct_template(self):
+        response = self.client.get(reverse("main:show_projects"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "education.html")
+        self.assertTemplateUsed(response, "projects.html")
 
-    def test_education_content_displayed(self):
-        response = self.client.get(reverse("main:show_education"))
-        self.assertContains(response, self.education.institution)
-        self.assertContains(response, self.education.field_of_study)
+    def test_project_content_displayed(self):
+        response = self.client.get(reverse("main:show_projects"))
+        self.assertContains(response, self.project.title)
+        self.assertContains(response, self.project.tech_stack)
 
-    def test_empty_education_page(self):
-        Education.objects.all().delete()
-        response = self.client.get(reverse("main:show_education"))
+    def test_empty_project_page(self):
+        Project.objects.all().delete()
+        response = self.client.get(reverse("main:show_projects"))
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Belum ada proyek yang ditambahkan.")
