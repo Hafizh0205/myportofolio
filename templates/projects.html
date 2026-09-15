@@ -27,14 +27,7 @@
         <section class="content-section" id="projects">
             <div class="container">
                 <p class="section-kicker">Hasil Karya & Proyek</p>
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                    <h2 class="section-title" style="margin-bottom: 0;">Featured Projects</h2>
-                    <a href="{% url 'main:create_project' %}" class="social-link" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));">
-                        + Tambah Proyek
-                    </a>
-                </div>
-
+                <h2 class="section-title">Featured Projects</h2>
                 <div class="edu-list">
                     {% for project in project_list %}
                     <details class="edu-card">
@@ -46,18 +39,12 @@
                             <span class="edu-icon">&#9660;</span>
                         </summary>
                         <div class="edu-details-content">
-                            {% if project.project_image_url %}
-                            <img src="{{ project.project_image_url }}" alt="Gambar {{ project.title }}" style="max-width: 100%; border-radius: var(--radius); margin-top: 0.75rem; border: 1px solid var(--line);">
-                            {% endif %}
-                            
-                            <p style="margin-top: 0.75rem;">{{ project.description }}</p>
-                            
-                            <div style="margin-top: 1rem; display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-                                {% if project.project_url %}
+                            <p>{{ project.description }}</p>
+                            {% if project.project_url %}
+                            <p style="margin-top: 0.75rem;">
                                 <a href="{{ project.project_url }}" class="social-link" target="_blank" rel="noopener">Lihat Proyek</a>
-                                {% endif %}
-                                {% include "components/project_delete_modal.html" with project=project %}
-                            </div>
+                            </p>
+                            {% endif %}
                         </div>
                     </details>
                     {% empty %}
