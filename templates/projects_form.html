@@ -7,15 +7,15 @@
 <main>
     <section class="experience-section">
         <div class="container">
-            <article class="creative-form-card edu-card in-view">
+            <article class="edu-card in-view" style="padding: 2.5rem; width: 100%;">
                 <p class="section-kicker">Formulir Portofolio</p>
-                <h1 style="font-family: 'Space Grotesk', sans-serif; margin: 0.4rem 0 1.5rem; font-size: 2.2rem;">Tambah Proyek Baru</h1>
+                <h1 style="font-family: 'Space Grotesk', sans-serif; margin: 0.4rem 0 1.5rem; font-size: 2rem;">Tambah Proyek Baru</h1>
                 
-                <form method="post" action="{% url 'main:create_project' %}" class="project-form">
+                <form method="post" action="{% url 'main:create_project' %}" class="project-form" style="width: 100%;">
                     {% csrf_token %}
                     {% for field in form %}
-                        <div style="margin-bottom: 1.5rem;">
-                            <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: 700; font-size: 0.95rem; color: var(--ink);">{{ field.label }}</label>
+                        <div style="margin-bottom: 1.25rem; width: 100%;">
+                            <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 0.4rem; font-weight: 700; font-size: 0.9rem; color: var(--ink);">{{ field.label }}</label>
                             {{ field }}
                             {% for error in field.errors %}
                                 <p style="color: var(--accent-red); font-size: 0.85rem; margin-top: 0.35rem;">{{ error }}</p>
@@ -23,7 +23,7 @@
                         </div>
                     {% endfor %}
                     
-                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <div style="display: flex; gap: 0.75rem; margin-top: 2rem;">
                         <button type="submit" class="social-link">Tambah Project</button>
                         <a href="{% url 'main:show_projects' %}" class="social-link">Batal</a>
                     </div>
