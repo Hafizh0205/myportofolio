@@ -1,5 +1,5 @@
 <button type="button"
-        class="btn-pill btn-pill-red"
+        class="social-link"
         popovertarget="delete-project-{{ project.id }}"
         aria-label="Hapus {{ project.title }}"
         title="Hapus proyek">
@@ -25,12 +25,12 @@
 
         <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
             <button type="button"
-                    class="btn-pill btn-pill-dark"
+                    class="social-link"
                     popovertarget="delete-project-{{ project.id }}"
                     popovertargetaction="hide">Batal</button>
             <form method="post" action="{% url 'main:delete_project' project.id %}">
                 {% csrf_token %}
-                <button type="submit" class="btn-pill btn-pill-red">Ya, Hapus</button>
+                <button type="submit" class="social-link">Ya, Hapus</button>
             </form>
         </div>
     </div>

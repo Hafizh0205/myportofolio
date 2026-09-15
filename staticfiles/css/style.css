@@ -7,12 +7,12 @@
 :root {
     --ink: #f3f4f6;
     --paper-gradient: linear-gradient(135deg, #090d16 0%, #111827 50%, #180b12 100%);
-    --card-bg: rgba(17, 24, 39, 0.85);
+    --card-bg: rgba(17, 24, 39, 0.65);
     --accent-blue: #38bdf8;
-    --accent-red: #ef4444;
-    --line: rgba(55, 65, 81, 0.6);
+    --accent-red: #f43f5e;
+    --line: rgba(255, 255, 255, 0.08);
     --text-muted: #9ca3af;
-    --radius: 12px;
+    --radius: 14px;
 }
 
 body {
@@ -37,7 +37,7 @@ h1, .brand {
 .site-header {
     border-bottom: 1px solid var(--line);
     background: rgba(9, 13, 22, 0.8);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -76,229 +76,33 @@ h1, .brand {
     color: var(--accent-blue);
 }
 
-.hero {
-    padding: 4.5rem 0 5rem;
-}
-
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    grid-template-areas:
-        "identity photo"
-        "details photo";
-    gap: 1.5rem 3rem;
-}
-
-.hero-identity { grid-area: identity; }
-.hero-details { grid-area: details; }
-
-.hero-kicker {
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-blue);
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-}
-
-.hero-identity h1 {
-    font-size: clamp(3rem, 7vw, 5rem);
-    line-height: 0.95;
-    background: linear-gradient(135deg, #ffffff 30%, var(--accent-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.bio {
-    color: var(--text-muted);
-    max-width: 480px;
-    margin-bottom: 1.5rem;
-}
-
-.meta-list {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.meta-row dt {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
-    margin-bottom: 0.15rem;
-}
-
-.meta-row dd {
-    font-weight: 600;
-    color: var(--ink);
-}
-
-.social-links {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
+/* Tombol Khas GitHub milikmu (Dark default -> Glowing Gradient on Hover) */
 .social-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
     color: #ffffff;
-    background: linear-gradient(135deg, #1f2937, #111827);
+    background: rgba(31, 41, 55, 0.7);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 0.5rem 1.1rem;
-    transition: all 0.2s ease;
+    padding: 0.6rem 1.2rem;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .social-link:hover {
     border-color: var(--accent-blue);
     background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+    transform: translateY(-2px);
 }
 
-.hero-photo {
-    grid-area: photo;
-    align-self: center;
-    position: relative;
-}
-
-.photo-block {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
-    border-radius: var(--radius);
-    z-index: 0;
-    opacity: 0.8;
-}
-
-.avatar {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: var(--radius);
-    border: 3px solid #1f2937;
-}
-
-.content-section {
-    padding: 3rem 0;
-    border-top: 1px solid var(--line);
-}
-
-.section-title {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 2rem;
-    position: relative;
-    display: inline-block;
-}
-
-.section-title::after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-blue), var(--accent-red));
-    border-radius: var(--radius);
-}
-
-/* Accordion Card Style dengan Animation Slide-in milikmu */
-.edu-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.edu-card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    backdrop-filter: blur(8px);
-    opacity: 0;
-    transform: translateX(-60px);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
-}
-
-.edu-card.in-view {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.edu-list .edu-card:nth-child(1).in-view { transition-delay: 0.1s; }
-.edu-list .edu-card:nth-child(2).in-view { transition-delay: 0.25s; }
-.edu-list .edu-card:nth-child(3).in-view { transition-delay: 0.4s; }
-
-.edu-card:hover {
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
-}
-
-.edu-summary {
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    list-style: none;
-}
-
-.edu-summary::-webkit-details-marker { display: none; }
-
-.edu-header-info h3 {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 0.25rem;
-}
-
-.edu-header-info p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.edu-icon {
-    font-size: 0.9rem;
-    color: var(--accent-blue);
-    transition: transform 0.3s ease;
-}
-
-.edu-card[open] .edu-icon {
-    transform: rotate(180deg);
-    color: var(--accent-red);
-}
-
-.edu-details-content {
-    padding: 0 1.5rem 1.25rem 1.5rem;
-    border-top: 1px dashed var(--line);
-    margin-top: 0.5rem;
-}
-
-.edu-details-content ul {
-    list-style-type: disc;
-    padding-left: 1.2rem;
-    margin-top: 0.75rem;
-}
-
-.edu-details-content li {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 0.4rem;
-}
-
-.experience-section {
+.content-section, .experience-section {
     padding: 4rem 0;
     border-top: 1px solid var(--line);
 }
@@ -314,52 +118,39 @@ h1, .brand {
 .experience-section h1 {
     font-family: "Space Grotesk", -apple-system, sans-serif;
     margin: 0.4rem 0 1.5rem;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--ink);
 }
 
-.experience-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+/* Accordion Card dengan Animasi Slide Bawaan Kamu */
+.edu-list {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
-.experience-card {
-    padding: 1.25rem;
+.edu-card {
     background-color: var(--card-bg);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    backdrop-filter: blur(8px);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
 }
 
-.experience-card:hover {
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+.edu-card.in-view {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.experience-category {
-    color: var(--accent-blue);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
+.edu-card:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37), 0 0 15px rgba(56, 189, 248, 0.15);
 }
 
-.experience-card h2 {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
-    margin: 0.5rem 0;
-    font-size: 1.25rem;
-    color: var(--ink);
-}
-
-.experience-description, .empty-state {
-    color: var(--text-muted);
-}
-
-/* ========================================================
-   GAYA KAPSUL MODERN (ALA I KOMANG)
-   ======================================================== */
-
+/* Custom Grid Proyek */
 .project-header {
     width: 100%;
     display: flex;
@@ -369,95 +160,92 @@ h1, .brand {
     margin-bottom: 1.5rem;
 }
 
-.project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
 }
 
+.experience-card {
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.experience-card:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.2);
+    transform: translateY(-4px);
+}
+
+/* Search Bar Kreatif Modern */
 .project-search {
     display: flex;
     gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
 }
 
 .project-search_input {
     flex: 1;
-    padding: 0.65rem 1.25rem;
+    padding: 0.75rem 1.25rem;
     border: 1px solid var(--line);
-    border-radius: 9999px;
-    background: rgba(17, 24, 39, 0.7);
+    border-radius: var(--radius);
+    background: rgba(15, 23, 42, 0.6);
     color: var(--ink);
     font: inherit;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
 }
 
 .project-search_input:focus {
     outline: none;
     border-color: var(--accent-blue);
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+    background: rgba(15, 23, 42, 0.85);
 }
 
-/* Tombol Lonjong (Pill Button) ala I Komang */
-.btn-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.65rem 1.5rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    border-radius: 9999px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    font-family: inherit;
+/* Design Form Tambah Proyek Kreatif (Glass Container dengan Glowing Focus) */
+.creative-form-card {
+    padding: 3rem;
+    width: 100%;
+    background: rgba(17, 24, 39, 0.75);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
 }
 
-.btn-pill-blue {
-    background-color: var(--accent-blue);
-    color: #090d16;
+.creative-form-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-red));
 }
 
-.btn-pill-blue:hover {
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
-    transform: translateY(-1px);
-}
-
-.btn-pill-red {
-    background-color: var(--accent-red);
-    color: #ffffff;
-}
-
-.btn-pill-red:hover {
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
-    transform: translateY(-1px);
-}
-
-.btn-pill-dark {
-    background-color: var(--line);
-    color: var(--ink);
-}
-
-.btn-pill-dark:hover {
-    background-color: #4b5563;
-}
-
-/* Form Styling */
 .project-form input[type="text"],
 .project-form input[type="url"],
 .project-form textarea {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.75rem 1.25rem;
+    padding: 0.85rem 1.2rem;
     border: 1px solid var(--line);
-    border-radius: 9999px;
-    background: rgba(9, 13, 22, 0.7);
+    border-radius: var(--radius);
+    background: rgba(9, 13, 22, 0.75);
     color: var(--ink);
     font-family: inherit;
     font-size: 0.95rem;
+    transition: all 0.3s ease;
 }
 
 .project-form textarea {
-    border-radius: 16px;
-    min-height: 120px;
+    min-height: 130px;
     resize: vertical;
 }
 
@@ -465,10 +253,11 @@ h1, .brand {
 .project-form textarea:focus {
     outline: none;
     border-color: var(--accent-blue);
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    background: rgba(9, 13, 22, 0.95);
 }
 
-/* Modal Popover */
+/* Modal Popover Delete */
 .project-delete-modal {
     display: none;
     position: fixed;
@@ -491,7 +280,7 @@ h1, .brand {
     height: 100%;
     border: 0;
     background: rgba(9, 13, 22, 0.85);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
 }
 
 .project-delete-modal_content {
@@ -502,7 +291,7 @@ h1, .brand {
     background: var(--card-bg);
     border: 1px solid var(--line);
     border-radius: 20px;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.6);
 }
 
 .site-footer {
@@ -512,14 +301,4 @@ h1, .brand {
     border-top: 1px solid var(--line);
     text-align: center;
     background: rgba(9, 13, 22, 0.9);
-}
-
-@media (max-width: 600px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        grid-template-areas: "identity" "photo" "details";
-    }
-    .hero-photo { max-width: 220px; }
-    .project-grid { grid-template-columns: 1fr; }
-    .project-header { flex-direction: column; align-items: flex-start; }
 }

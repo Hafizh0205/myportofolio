@@ -10,7 +10,7 @@
             <p class="section-kicker">Karya yang saya bangun</p>
             <div class="project-header">
                 <h1>Projects</h1>
-                <a href="{% url 'main:create_project' %}" class="btn-pill btn-pill-blue">
+                <a href="{% url 'main:create_project' %}" class="social-link">
                     + Tambah Proyek
                 </a>
             </div>
@@ -23,7 +23,7 @@
                        placeholder="Cari berdasarkan nama proyek"
                        class="project-search_input"
                        aria-label="Cari berdasarkan nama proyek">
-                <button type="submit" class="btn-pill btn-pill-blue">Cari</button>
+                <button type="submit" class="social-link">Cari</button>
             </form>
 
             <!-- List Proyek -->
@@ -31,7 +31,7 @@
                 {% for project in project_list %}
                 <article class="experience-card">
                     {% if project.project_image_url %}
-                    <img src="{{ project.project_image_url }}" alt="Gambar {{ project.title }}" class="project-image" style="border-radius: 12px; margin-bottom: 0.75rem;">
+                    <img src="{{ project.project_image_url }}" alt="Gambar {{ project.title }}" class="project-image" style="width: 100%; border-radius: var(--radius); margin-bottom: 0.75rem;">
                     {% endif %}
                     <h2>{{ project.title }}</h2>
                     <span class="experience-category">{{ project.tech_stack }}</span>
@@ -42,7 +42,7 @@
                         <a href="{{ project.project_url }}" class="social-link" target="_blank" rel="noopener">Lihat Project</a>
                         {% endif %}
                         
-                        <!-- Include Modal Hapus -->
+                        <!-- Modal Hapus -->
                         {% include "components/project_delete_modal.html" with project=project %}
                     </div>
                 </article>
