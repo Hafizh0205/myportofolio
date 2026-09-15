@@ -10,9 +10,8 @@
             <p class="section-kicker">Karya yang saya bangun</p>
             <div class="project-header">
                 <h1>Projects</h1>
-                <a href="{% url 'main:create_project' %}" class="button project-add-button">
-                    <span aria-hidden="true">+</span>
-                    Tambah Proyek
+                <a href="{% url 'main:create_project' %}" class="social-link">
+                    + Tambah Proyek
                 </a>
             </div>
 
@@ -24,7 +23,7 @@
                        placeholder="Cari berdasarkan nama proyek"
                        class="project-search_input"
                        aria-label="Cari berdasarkan nama proyek">
-                <button type="submit" class="button">Cari</button>
+                <button type="submit" class="social-link" style="cursor: pointer;">Cari</button>
             </form>
 
             <!-- List Proyek -->
@@ -41,7 +40,7 @@
                     <div class="project-card-actions">
                         <div class="project-actions">
                             {% if project.project_url %}
-                            <a href="{{ project.project_url }}" class="button" target="_blank" rel="noopener">Lihat Project</a>
+                            <a href="{{ project.project_url }}" class="social-link" target="_blank" rel="noopener">Lihat Project</a>
                             {% endif %}
                             
                             <!-- Include Modal Hapus -->
