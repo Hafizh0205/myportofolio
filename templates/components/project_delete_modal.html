@@ -1,13 +1,10 @@
-<p class="experience-status">
-    <button type="button"
-            class="social-link"
-            style="border-color: var(--accent-red);"
-            popovertarget="delete-project-{{ project.id }}"
-            aria-label="Hapus {{ project.title }}"
-            title="Hapus proyek">
-        Hapus Proyek
-    </button>
-</p>
+<button type="button"
+        class="btn-pill btn-pill-red"
+        popovertarget="delete-project-{{ project.id }}"
+        aria-label="Hapus {{ project.title }}"
+        title="Hapus proyek">
+    Hapus Proyek
+</button>
 
 <div id="delete-project-{{ project.id }}"
      class="project-delete-modal"
@@ -23,24 +20,17 @@
             aria-label="Tutup konfirmasi hapus"></button>
 
     <div class="project-delete-modal_content">
-        <button type="button"
-                class="project-delete-modal_close"
-                popovertarget="delete-project-{{ project.id }}"
-                popovertargetaction="hide"
-                aria-label="Tutup konfirmasi hapus">×</button>
-
-        <h2 id="delete-project-title-{{ project.id }}">Hapus Projek?</h2>
+        <h2 id="delete-project-title-{{ project.id }}" style="font-family: 'Space Grotesk', sans-serif;">Hapus Projek?</h2>
         <p style="margin-top: 0.5rem; color: var(--text-muted);">Apakah Anda yakin ingin menghapus <strong>{{ project.title }}</strong>?</p>
 
-        <div class="project-delete-modal_actions">
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
             <button type="button"
-                    class="social-link"
-                    style="background: var(--line);"
+                    class="btn-pill btn-pill-dark"
                     popovertarget="delete-project-{{ project.id }}"
                     popovertargetaction="hide">Batal</button>
             <form method="post" action="{% url 'main:delete_project' project.id %}">
                 {% csrf_token %}
-                <button type="submit" class="social-link" style="border-color: var(--accent-red);">Ya, Hapus</button>
+                <button type="submit" class="btn-pill btn-pill-red">Ya, Hapus</button>
             </form>
         </div>
     </div>
