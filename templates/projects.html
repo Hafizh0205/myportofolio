@@ -1,90 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Hafizh Zuhdi Hartanto Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <header class="site-header">
-        <div class="container">
-            <a href="{% url 'main:show_main' %}" class="brand">Hafizh Zuhdi Hartanto</a>
-            <nav>
-                <a href="{% url 'main:show_main' %}#profile">Profile</a>
-                <a href="{% url 'main:show_main' %}#education">Education</a>
-                <a href="{% url 'main:show_main' %}#skills">Skills</a>
-                <a href="{% url 'main:show_experience' %}">Experience</a>
-                <a href="{% url 'main:show_projects' %}">Projects</a>
-            </nav>
-        </div>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <section class="content-section" id="projects">
-            <div class="container">
-                <p class="section-kicker">Hasil Karya & Proyek</p>
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="edu-list">
-                    {% for project in project_list %}
-                    <details class="edu-card">
-                        <summary class="edu-summary">
-                            <div class="edu-header-info">
-                                <h3>{{ project.title }}</h3>
-                                <p>{{ project.tech_stack }}</p>
-                            </div>
-                            <span class="edu-icon">&#9660;</span>
-                        </summary>
-                        <div class="edu-details-content">
-                            <p>{{ project.description }}</p>
-                            {% if project.project_url %}
-                            <p style="margin-top: 0.75rem;">
-                                <a href="{{ project.project_url }}" class="social-link" target="_blank" rel="noopener">Lihat Proyek</a>
-                            </p>
-                            {% endif %}
-                        </div>
-                    </details>
-                    {% empty %}
-                    <p class="empty-state">
-                        Belum ada proyek yang ditambahkan.
-                    </p>
-                    {% endfor %}
-                </div>
+{% block meta %}
+<title>Projects - Hafizh Zuhdi Hartanto</title>
+{% endblock meta %}
+
+{% block content %}
+<main>
+    <section class="content-section" id="projects">
+        <div class="container">
+            <p class="section-kicker">Hasil Karya & Proyek</p>
+            
+            <div class="project-header">
+                <h2 class="section-title" style="margin-bottom: 0;">Featured Projects</h2>
+                <a href="{% url 'main:create_project' %}" class="button project-add-button">
+                    <span aria-hidden="true">+</span> Tambah Proyek
+                </a>
             </div>
-        </section>
-    </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 Hafizh Zuhdi Hartanto. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+            <!-- Form Search -->
+            <form method="get" action="{% url 'main:show_projects' %}" class="project-search">
+                <input type="search" 
+                       name="title" 
+                       value="{{ title_query }}" 
+                       placeholder="Cari berdasarkan nama proyek" 
+                       class="project-search_input" 
+                       aria-label="Cari berdasarkan nama proyek">
+                <button type="submit" class="button">Cari</button>
+            </form>
+
+            <div class="edu-list">
+                {% for project in project_list %}
+                <details class="edu-card">
+                    <summary class="edu-summary">
+                        <div class="edu-header-info">
+                            <h3>{{ project.title }}</h3>
+                            <p>{{ project.tech_stack }}</p>
+                        </div>
+                        <span class="edu-icon">&#9660;</span>
+                    </summary>
+                    <div class="edu-details-content">
+                        {% if project.project_image_url %}
+                        <img src="{{ project.project_image_url }}" alt="Gambar {{ project.title }}" class="project-image">
+                        {% endif %}
+                        <p>{{ project.description }}</p>
+                        
+                        <div class="project-actions" style="margin-top: 1rem; display: flex; gap: 0.75rem; align-items: center;">
+                            {% if project.project_url %}
+                            <a href="{{ project.project_url }}" class="social-link" target="_blank" rel="noopener">Lihat Proyek</a>
+                            {% endif %}
+                            {% include "components/project_delete_modal.html" with project=project %}
+                        </div>
+                    </div>
+                </details>
+                {% empty %}
+                {% if title_query %}
+                <p class="empty-state">Tidak ada proyek dengan nama tersebut.</p>
+                {% else %}
+                <p class="empty-state">Belum ada proyek yang ditambahkan.</p>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-    </footer>
+    </section>
+</main>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in-view');
-                    } else {
-                        entry.target.classList.remove('in-view');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.edu-card').forEach(card => {
-                observer.observe(card);
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else {
+                    entry.target.classList.remove('in-view');
+                }
             });
+        }, observerOptions);
+
+        document.querySelectorAll('.edu-card').forEach(card => {
+            observer.observe(card);
         });
-    </script>
-</body>
-</html>
+    });
+</script>
+{% endblock content %}
