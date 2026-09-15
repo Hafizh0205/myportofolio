@@ -156,6 +156,8 @@ h1, .brand {
     border-radius: var(--radius);
     padding: 0.5rem 1.1rem;
     transition: all 0.2s ease;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .social-link:hover {
@@ -218,7 +220,7 @@ h1, .brand {
     border-radius: var(--radius);
 }
 
-/* Accordion Card Style dengan Scroll-Trigger Animation */
+/* Accordion Card Style */
 .edu-list {
     display: flex;
     flex-direction: column;
@@ -241,17 +243,9 @@ h1, .brand {
     transform: translateX(0);
 }
 
-.edu-list .edu-card:nth-child(1).in-view {
-    transition-delay: 0.1s;
-}
-
-.edu-list .edu-card:nth-child(2).in-view {
-    transition-delay: 0.25s;
-}
-
-.edu-list .edu-card:nth-child(3).in-view {
-    transition-delay: 0.4s;
-}
+.edu-list .edu-card:nth-child(1).in-view { transition-delay: 0.1s; }
+.edu-list .edu-card:nth-child(2).in-view { transition-delay: 0.25s; }
+.edu-list .edu-card:nth-child(3).in-view { transition-delay: 0.4s; }
 
 .edu-card:hover {
     border-color: var(--accent-blue);
@@ -313,7 +307,7 @@ h1, .brand {
     margin-bottom: 0.4rem;
 }
 
-/* Styling Halaman Experience (Tutorial 02) */
+/* Styling Experience & Projects */
 .experience-section {
     padding: 4rem 0;
     border-top: 1px solid var(--line);
@@ -380,6 +374,153 @@ h1, .brand {
     color: var(--accent-red);
 }
 
+/* Tutorial 03 Component Styling */
+.project-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 0.75rem;
+}
+
+.project-search {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-search_input {
+    flex: 1;
+    max-width: 400px;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--card-bg);
+    color: var(--ink);
+    font: inherit;
+}
+
+.project-search_input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+/* Form Fields Styling (Fix input putih menumpuk) */
+.project-form input[type="text"],
+.project-form input[type="url"],
+.project-form textarea,
+.project-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(9, 13, 22, 0.7);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-form input[type="text"]:focus,
+.project-form input[type="url"]:focus,
+.project-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.project-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Popover Modal Hapus */
+.project-delete-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-delete-modal:popover-open {
+    display: flex;
+}
+
+.project-delete-modal_backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: rgba(9, 13, 22, 0.85);
+    backdrop-filter: blur(4px);
+    cursor: default;
+}
+
+.project-delete-modal_content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 480px);
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+}
+
+.project-delete-modal_content h2 {
+    margin: 0 0 0.75rem;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+}
+
+.project-delete-modal_close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.project-delete-modal_actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
 .site-footer {
     padding: 1.5rem;
     color: var(--text-muted);
@@ -408,5 +549,18 @@ h1, .brand {
 
     .content-section {
         padding: 2.5rem 0;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .project-search {
+        width: 100%;
     }
 }
