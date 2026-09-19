@@ -24,7 +24,7 @@
 
             <div class="edu-list" style="margin-top: 1.5rem;">
                 {% for project in project_list %}
-                <details class="edu-card in-view">
+                <details class="edu-card">
                     <summary class="edu-summary">
                         <div class="edu-header-info">
                             <h3>{{ project.title }}</h3>
@@ -33,7 +33,7 @@
                         <span class="edu-icon">&#9660;</span>
                     </summary>
                     <div class="edu-details-content">
-                        <p style="margin-top: 0.75rem; color: var(--text-muted); word-break: break-word;">
+                        <p style="margin-top: 0.75rem; color: var(--text-muted);">
                             {{ project.description }}
                         </p>
 

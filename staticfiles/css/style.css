@@ -241,6 +241,8 @@ h1, .brand {
 .edu-list .edu-card:nth-child(1).in-view { transition-delay: 0.1s; }
 .edu-list .edu-card:nth-child(2).in-view { transition-delay: 0.25s; }
 .edu-list .edu-card:nth-child(3).in-view { transition-delay: 0.4s; }
+.edu-list .edu-card:nth-child(4).in-view { transition-delay: 0.55s; }
+.edu-list .edu-card:nth-child(5).in-view { transition-delay: 0.7s; }
 
 .edu-card:hover {
     border-color: var(--accent-blue);
