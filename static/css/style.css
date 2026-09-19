@@ -369,8 +369,12 @@ h1, .brand {
     margin-bottom: 1.5rem;
 }
 
+/* Mengubah layout kartu project menjadi 1 kolom vertikal full-width */
 .project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
 
 .project-search {
@@ -440,7 +444,7 @@ h1, .brand {
     background-color: #4b5563;
 }
 
-/* Form Styling - Sudah Termasuk Input Date */
+/* Form Styling - Termasuk Input Date */
 .project-form input[type="text"],
 .project-form input[type="url"],
 .project-form input[type="date"],
