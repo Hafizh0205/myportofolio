@@ -213,7 +213,7 @@ h1, .brand {
     border-radius: var(--radius);
 }
 
-/* Accordion Card Style dengan Animation Slide-in milikmu */
+/* Accordion Card Style dengan Animation Slide-in */
 .edu-list {
     display: flex;
     flex-direction: column;
@@ -440,9 +440,10 @@ h1, .brand {
     background-color: #4b5563;
 }
 
-/* Form Styling */
+/* Form Styling - Sudah Termasuk Input Date */
 .project-form input[type="text"],
 .project-form input[type="url"],
+.project-form input[type="date"],
 .project-form textarea {
     width: 100%;
     box-sizing: border-box;
@@ -453,6 +454,12 @@ h1, .brand {
     color: var(--ink);
     font-family: inherit;
     font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
 }
 
 .project-form textarea {
