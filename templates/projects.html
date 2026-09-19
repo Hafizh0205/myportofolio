@@ -5,7 +5,7 @@
 
 {% block content %}
 <main>
-    <section class="experience-section" id="projects">
+    <section class="content-section" id="projects">
         <div class="container">
             <p class="section-kicker">Karya Yang Saya Bangun</p>
             
@@ -22,38 +22,37 @@
                 <button type="submit" class="social-link">Cari</button>
             </form>
 
-            <div class="project-grid" style="margin-top: 1.5rem;">
+            <div class="edu-list" style="margin-top: 1.5rem;">
                 {% for project in project_list %}
-                <article class="edu-card in-view" style="padding: 1.5rem; width: 100%;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
-                        <div>
-                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--ink); margin-bottom: 0.35rem;">
-                                {{ project.title }}
-                            </h3>
-                            <p style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.75rem;">
-                                {{ project.tech_stack }}
-                            </p>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">
-                                {{ project.description }}
-                            </p>
+                <details class="edu-card in-view">
+                    <summary class="edu-summary">
+                        <div class="edu-header-info">
+                            <h3>{{ project.title }}</h3>
+                            <p>{{ project.tech_stack }}</p>
+                        </div>
+                        <span class="edu-icon">&#9660;</span>
+                    </summary>
+                    <div class="edu-details-content">
+                        <p style="margin-top: 0.75rem; color: var(--text-muted); word-break: break-word;">
+                            {{ project.description }}
+                        </p>
+
+                        <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center;">
+                            {% if project.project_url %}
+                            <a href="{{ project.project_url }}" target="_blank" class="social-link">
+                                Lihat Proyek &rarr;
+                            </a>
+                            {% endif %}
+                            
+                            <form method="post" action="{% url 'main:delete_project' project.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="social-link" style="border-color: var(--accent-red);" onclick="return confirm('Apakah Anda yakin ingin menghapus proyek ini?')">
+                                    Hapus Proyek
+                                </button>
+                            </form>
                         </div>
                     </div>
-
-                    <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center;">
-                        {% if project.project_url %}
-                        <a href="{{ project.project_url }}" target="_blank" class="social-link">
-                            Lihat Proyek &rarr;
-                        </a>
-                        {% endif %}
-                        
-                        <form method="post" action="{% url 'main:delete_project' project.id %}" style="display: inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="social-link" style="border-color: var(--accent-red);" onclick="return confirm('Apakah Anda yakin ingin menghapus proyek ini?')">
-                                Hapus Proyek
-                            </button>
-                        </form>
-                    </div>
-                </article>
+                </details>
                 {% empty %}
                 <p class="empty-state">Belum ada proyek yang ditemukan.</p>
                 {% endfor %}
@@ -61,4 +60,26 @@
         </div>
     </section>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.edu-card').forEach(card => {
+            observer.observe(card);
+        });
+    });
+</script>
 {% endblock content %}

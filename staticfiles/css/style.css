@@ -151,6 +151,7 @@ h1, .brand {
     border-radius: var(--radius);
     padding: 0.5rem 1.1rem;
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .social-link:hover {
@@ -218,6 +219,7 @@ h1, .brand {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
 }
 
 .edu-card {
@@ -262,17 +264,20 @@ h1, .brand {
     font-weight: 700;
     color: var(--ink);
     margin-bottom: 0.25rem;
+    word-break: break-word; /* Mencegah teks panjang merusak layout */
 }
 
 .edu-header-info p {
     font-size: 0.9rem;
     color: var(--text-muted);
+    word-break: break-word;
 }
 
 .edu-icon {
     font-size: 0.9rem;
     color: var(--accent-blue);
     transition: transform 0.3s ease;
+    margin-left: 1rem;
 }
 
 .edu-card[open] .edu-icon {
@@ -284,6 +289,7 @@ h1, .brand {
     padding: 0 1.5rem 1.25rem 1.5rem;
     border-top: 1px dashed var(--line);
     margin-top: 0.5rem;
+    word-break: break-word;
 }
 
 .edu-details-content ul {
@@ -357,7 +363,7 @@ h1, .brand {
 }
 
 /* ========================================================
-   GAYA KAPSUL MODERN
+   GAYA KAPSUL MODERN & PROJECTS LAYOUT
    ======================================================== */
 
 .project-header {
@@ -369,7 +375,6 @@ h1, .brand {
     margin-bottom: 1.5rem;
 }
 
-/* Mengubah layout kartu project menjadi 1 kolom vertikal full-width */
 .project-grid {
     display: flex;
     flex-direction: column;
