@@ -11,7 +11,6 @@
             
             <div class="project-header">
                 <h1 style="margin: 0;">Organizational Experience</h1>
-                <!-- Tombol Tambah Pengalaman -->
                 <a href="{% url 'main:create_experience' %}" class="social-link">
                     + Tambah Pengalaman
                 </a>
@@ -19,7 +18,7 @@
 
             <div class="edu-list">
                 {% for exp in experience_list %}
-                <details class="edu-card">
+                <details class="edu-card in-view">
                     <summary class="edu-summary">
                         <div class="edu-header-info">
                             <h3>{{ exp.title }}</h3>
@@ -30,7 +29,6 @@
                     <div class="edu-details-content">
                         <p style="margin-top: 0.75rem; color: var(--text-muted);">{{ exp.description }}</p>
 
-                        <!-- Tombol Aksi Edit & Hapus -->
                         <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem;">
                             <a href="{% url 'main:edit_experience' exp.id %}" class="social-link">
                                 Edit
@@ -51,4 +49,26 @@
         </div>
     </section>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.edu-card').forEach(card => {
+            observer.observe(card);
+        });
+    });
+</script>
 {% endblock content %}
