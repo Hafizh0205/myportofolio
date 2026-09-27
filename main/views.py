@@ -126,7 +126,7 @@ def toggle_star(request, project_id):
 
 
 # ========================================================
-# SECTION EXPERIENCE (TUGAS 3)
+# SECTION EXPERIENCE (TUGAS 4)
 # ========================================================
 
 def show_experience(request):
@@ -137,23 +137,30 @@ def show_experience(request):
     )
     experiences = [exp.object for exp in experiences]
 
+    # Cek keanggotaan grup Editor untuk otorisasi di template
+    is_editor = request.user.groups.filter(name='Editor').exists() if request.user.is_authenticated else False
+
     context = {
         "name": "Hafizh Zuhdi Hartanto",
         "experience_list": experiences,
+        "is_editor": is_editor,
     }
     return render(request, "experience.html", context)
 
 def get_experience_json(request):
     experiences = Experience.objects.all()
-    experiences_json = serializers.serialize("json", experiences)
+    experiences_json = serializers.serialize("json", experiences, use_natural_foreign_keys=True)
     return HttpResponse(experiences_json, content_type="application/json")
 
 def get_experience_json_by_id(request, id):
     experience = Experience.objects.filter(pk=id)
-    experience_json = serializers.serialize("json", experience)
+    experience_json = serializers.serialize("json", experience, use_natural_foreign_keys=True)
     return HttpResponse(experience_json, content_type="application/json")
 
+@login_required(login_url="/login/")
 def create_experience(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
     form = ExperienceForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         form.save()
@@ -166,7 +173,12 @@ def create_experience(request):
     }
     return render(request, "experience_form.html", context)
 
+@login_required(login_url="/login/")
 def edit_experience(request, id):
+    is_editor = request.user.groups.filter(name='Editor').exists()
+    if not (request.user.is_superuser or is_editor):
+        raise PermissionDenied
+
     experience = get_object_or_404(Experience, pk=id)
     form = ExperienceForm(request.POST or None, instance=experience)
     if request.method == "POST" and form.is_valid():
@@ -181,10 +193,23 @@ def edit_experience(request, id):
     }
     return render(request, "experience_form.html", context)
 
+@login_required(login_url="/login/")
 def delete_experience(request, id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
     experience = get_object_or_404(Experience, pk=id)
     if request.method == "POST":
         experience.delete()
         messages.success(request, "Pengalaman berhasil dihapus!")
         return redirect("main:show_experience")
+    return redirect("main:show_experience")
+
+@login_required(login_url="/login/")
+def toggle_star_experience(request, id):
+    experience = get_object_or_404(Experience, pk=id)
+    if request.method == "POST":
+        if request.user in experience.starred_by.all():
+            experience.starred_by.remove(request.user)
+        else:
+            experience.starred_by.add(request.user)
     return redirect("main:show_experience")

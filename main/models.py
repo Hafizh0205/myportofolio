@@ -7,6 +7,8 @@ class Experience(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=50)
     ended_at = models.DateTimeField(null=True, blank=True)
+    # Field baru untuk fitur star pada Experience
+    starred_by = models.ManyToManyField(User, related_name="starred_experiences", blank=True)
 
     @property
     def is_ongoing(self):
