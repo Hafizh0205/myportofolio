@@ -266,7 +266,7 @@ h1, .brand {
     font-weight: 700;
     color: var(--ink);
     margin-bottom: 0.25rem;
-    word-break: break-word; /* Mencegah teks panjang merusak layout */
+    word-break: break-word;
 }
 
 .edu-header-info p {
@@ -530,6 +530,46 @@ h1, .brand {
     border-top: 1px solid var(--line);
     text-align: center;
     background: rgba(9, 13, 22, 0.9);
+}
+
+/* ========================================================
+   GAYA TOMBOL STAR (TUTORIAL 04)
+   ======================================================== */
+.star-form {
+    display: inline;
+}
+
+.button-star {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: linear-gradient(135deg, #1f2937, #111827);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.button-star:hover {
+    border-color: var(--accent-blue);
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
+}
+
+.button-star.is-starred {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
+    color: #ffffff;
+    border-color: var(--accent-blue);
+}
+
+.star-count {
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 0.75rem;
 }
 
 @media (max-width: 600px) {

@@ -11,9 +11,11 @@
             
             <div class="project-header">
                 <h1 style="margin: 0;">Projects</h1>
+                {% if user.is_superuser %}
                 <a href="{% url 'main:create_project' %}" class="social-link">
                     + Tambah Proyek
                 </a>
+                {% endif %}
             </div>
 
             <!-- Form Pencarian -->
@@ -37,19 +39,25 @@
                             {{ project.description }}
                         </p>
 
-                        <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center;">
+                        <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
                             {% if project.project_url %}
                             <a href="{{ project.project_url }}" target="_blank" class="social-link">
                                 Lihat Proyek &rarr;
                             </a>
                             {% endif %}
+
+                            <!-- Komponen Tombol Star -->
+                            {% include "components/project_star.html" with project=project %}
                             
+                            <!-- Hanya Superuser yang Bisa Menghapus Proyek -->
+                            {% if user.is_superuser %}
                             <form method="post" action="{% url 'main:delete_project' project.id %}" style="display: inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="social-link" style="border-color: var(--accent-red);" onclick="return confirm('Apakah Anda yakin ingin menghapus proyek ini?')">
                                     Hapus Proyek
                                 </button>
                             </form>
+                            {% endif %}
                         </div>
                     </div>
                 </details>
