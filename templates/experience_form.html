@@ -13,7 +13,7 @@
                     {% if experience %}Edit Pengalaman{% else %}Tambah Pengalaman Baru{% endif %}
                 </h1>
                 
-                <form method="post" class="project-form" style="width: 100%;">
+                <form method="post" action="{% if experience %}{% url 'main:edit_experience' experience.id %}{% else %}{% url 'main:create_experience' %}{% endif %}" class="project-form" style="width: 100%;">
                     {% csrf_token %}
                     {% for field in form %}
                         <div style="margin-bottom: 1.25rem; width: 100%;">
