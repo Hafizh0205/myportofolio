@@ -34,9 +34,7 @@
 
                         <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
                             <!-- Tombol Star (Hanya untuk pengguna terdaftar yang sudah login) -->
-                            {% if user.is_authenticated %}
-                                {% include "components/experience_star.html" with experience=exp %}
-                            {% endif %}
+                            {% include "components/experience_star.html" with experience=exp %}
 
                             <!-- Tombol Edit (Superuser DAN Editor) -->
                             {% if user.is_superuser or is_editor %}
