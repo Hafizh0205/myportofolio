@@ -45,8 +45,8 @@
         <p>Belum ada proyek yang ditambahkan atau ditemukan.</p>
       </div>
 
-      <!-- Container Grid Utama Tempat Render AJAX -->
-      <div id="grid" class="project-grid hide"></div>
+      <!-- Container Grid Utama Tempat Render AJAX (Accordion edu-list) -->
+      <div id="grid" class="edu-list hide" style="margin-top: 1.5rem;"></div>
     </div>
   </section>
 </main>
@@ -108,20 +108,20 @@
     gridContainer.classList.toggle('hide', !showGrid);
   }
 
-  // Merakit Kartu Project
+  // Merakit Kartu Project Accordion (<details> & <summary>)
   function buildProjectCardElement(item) {
     const project = item.fields;
     const projectId = item.pk;
 
-    const articleElement = document.createElement('article');
-    articleElement.className = 'experience-card';
+    const detailsElement = document.createElement('details');
+    detailsElement.className = 'edu-card in-view';
 
     const imageHtml = project.project_image_url
-      ? `<img src="${escapeHtml(project.project_image_url)}" alt="Gambar ${escapeHtml(project.title)}" class="project-image" style="max-width:100%; border-radius:var(--radius); margin-bottom:1rem;">`
+      ? `<img src="${escapeHtml(project.project_image_url)}" alt="Gambar ${escapeHtml(project.title)}" class="project-image" style="max-width:100%; border-radius:var(--radius); margin-top:1rem; margin-bottom:1rem;">`
       : '';
 
     const urlHtml = project.project_url
-      ? `<a href="${escapeHtml(project.project_url)}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="font-size:0.8rem; padding:0.4rem 1rem;">Lihat Proyek →</a>`
+      ? `<a href="${escapeHtml(project.project_url)}" target="_blank" rel="noopener noreferrer" class="social-link">Lihat Proyek →</a>`
       : '';
 
     const deleteUrl = "{% url 'main:delete_project' '00000000-0000-0000-0000-000000000000' %}".replace('00000000-0000-0000-0000-000000000000', projectId);
@@ -130,7 +130,7 @@
     const deleteHtml = IS_SUPERUSER
       ? `<form method="post" action="${deleteUrl}" style="display:inline;">
           {% csrf_token %}
-          <button type="submit" class="btn-pill btn-pill-red" style="font-size:0.8rem; padding:0.4rem 1rem;" onclick="return confirm('Yakin ingin menghapus project ini?');">Hapus</button>
+          <button type="submit" class="social-link" style="border-color: var(--accent-red);" onclick="return confirm('Apakah Anda yakin ingin menghapus proyek ini?');">Hapus Proyek</button>
         </form>`
       : '';
 
@@ -141,27 +141,38 @@
       : "Jadilah yang pertama memberi star";
 
     const completeCardHtml = `
-      ${imageHtml}
-      <h2>${escapeHtml(project.title)}</h2>
-      <span class="experience-category">${escapeHtml(project.tech_stack)}</span>
-      <p class="experience-description" style="margin: 0.75rem 0 1.25rem;">${escapeHtml(project.description)}</p>
-      
-      <div class="project-card-actions" style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-        ${urlHtml}
-        <form method="post" action="${starUrl}" class="star-form">
-          {% csrf_token %}
-          <button type="submit" class="button button-star${isStarredClass}" title="${starTitle}">
-            <span aria-hidden="true">★</span>
-            ${starText}
-            <span class="star-count">${project.star_count}</span>
-          </button>
-        </form>
-        ${deleteHtml}
+      <summary class="edu-summary">
+        <div class="edu-header-info">
+          <h3>${escapeHtml(project.title)}</h3>
+          <p>${escapeHtml(project.tech_stack)}</p>
+        </div>
+        <span class="edu-icon">&#9660;</span>
+      </summary>
+      <div class="edu-details-content">
+        ${imageHtml}
+        <p style="margin-top: 0.75rem; color: var(--text-muted);">
+          ${escapeHtml(project.description)}
+        </p>
+
+        <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+          ${urlHtml}
+          
+          <form method="post" action="${starUrl}" class="star-form">
+            {% csrf_token %}
+            <button type="submit" class="button button-star${isStarredClass}" title="${starTitle}">
+              <span aria-hidden="true">★</span>
+              ${starText}
+              <span class="star-count">${project.star_count}</span>
+            </button>
+          </form>
+
+          ${deleteHtml}
+        </div>
       </div>
     `;
 
-    articleElement.innerHTML = completeCardHtml;
-    return articleElement;
+    detailsElement.innerHTML = completeCardHtml;
+    return detailsElement;
   }
 
   // Fetch Data via AJAX
