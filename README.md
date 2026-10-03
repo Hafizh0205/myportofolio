@@ -48,3 +48,14 @@ Proses *serialization* sangat diperlukan karena data yang diambil oleh ORM Djang
 * **Tools yang Digunakan**: AI Collaboration Tool (Gemini).
 * **Penggunaan AI**: AI digunakan sebagai teman diskusi untuk menyusun logika deserialisasi data JSON pada fungsi view, mendesain tampilan form berbasis glassmorphism, serta membantu merapikan alur pengondisian update form berbasis instance ID.
 * **Proses Mandiri**: Seluruh pembuatan kode pada `forms.py`, `views.py`, refactoring template HTML menggunakan `base.html`, pengujian fungsionalitas CRUD lokal, hingga *push* akhir ke PWS dilakukan dan diverifikasi sendiri secara mandiri.
+
+### Tugas 5
+
+1. **Apa itu debouncing dan mengapa penting diterapkan pada fitur pencarian AJAX?**
+   Debouncing adalah teknik penundaan eksekusi fungsi hingga jeda waktu tertentu setelah event terakhir selesai dipanggil. Teknik ini sangat penting untuk pencarian berbasis AJAX agar server tidak kebanjiran permintaan HTTP (*rate limit/overload*) setiap kali pengguna mengetik satu karakter. Dengan debouncing, permintaan AJAX hanya dikirim saat pengguna telah selesai mengetik sejenak.
+
+2. **Fungsi penggunaan `await` saat menggunakan `fetch()` dan apa yang terjadi jika tanpa `await`:**
+   Keyword `await` berfungsi untuk menghentikan sementara eksekusi baris kode di dalam *async function* sampai *Promise* dari pemanggilan `fetch()` selesai (*resolved*). Jika tanpa `await`, kode akan terus berjalan ke baris berikutnya secara sinkron sebelum data dari server diterima, sehingga variabel penampung respons hanya berisi objek *Promise* kosong yang belum selesai (*pending*) dan dapat menyebabkan error saat data diolah.
+
+3. **Apa itu serangan XSS (Cross-Site Scripting) dan mengapa AJAX/JavaScript lebih rentan?**
+   XSS adalah serangan di mana penyerang berhasil menyisipkan skrip kode JavaScript jahat ke dalam aplikasi web yang kemudian dieksekusi oleh browser pengguna lain. Tampilan data lewat AJAX/JavaScript lebih rentan karena manipulasi elemen HTML dilakukan menggunakan `innerHTML` atau *template literal*, yang tidak memiliki sistem proteksi bawaan *auto-escaping* seperti template engine Django `{{ variable }}`. Oleh karena itu, data yang di-render lewat JavaScript wajib di-escape manual atau disanitasi menggunakan `escapeHtml` / `textContent` dan `strip_tags`.
