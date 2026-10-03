@@ -238,11 +238,12 @@ h1, .brand {
     transform: translateX(0);
 }
 
-.edu-list .edu-card:nth-child(1).in-view { transition-delay: 0.1s; }
-.edu-list .edu-card:nth-child(2).in-view { transition-delay: 0.25s; }
-.edu-list .edu-card:nth-child(3).in-view { transition-delay: 0.4s; }
-.edu-list .edu-card:nth-child(4).in-view { transition-delay: 0.55s; }
-.edu-list .edu-card:nth-child(5).in-view { transition-delay: 0.7s; }
+/* Jeda transisi disamakan per 0.25s agar temponya pas dengan Project dan Experience */
+.edu-list .edu-card:nth-child(1).in-view { transition-delay: 0.25s; }
+.edu-list .edu-card:nth-child(2).in-view { transition-delay: 0.50s; }
+.edu-list .edu-card:nth-child(3).in-view { transition-delay: 0.75s; }
+.edu-list .edu-card:nth-child(4).in-view { transition-delay: 1.00s; }
+.edu-list .edu-card:nth-child(5).in-view { transition-delay: 1.25s; }
 
 .edu-card:hover {
     border-color: var(--accent-blue);

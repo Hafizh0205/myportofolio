@@ -109,12 +109,13 @@
   }
 
   // Merakit Kartu Project Accordion (<details> & <summary>)
-  function buildProjectCardElement(item) {
+  function buildProjectCardElement(item, index = 0) {
     const project = item.fields;
     const projectId = item.pk;
 
     const detailsElement = document.createElement('details');
-    detailsElement.className = 'edu-card in-view';
+    detailsElement.className = 'edu-card';
+    detailsElement.style.transitionDelay = `${(index + 1) * 0.25}s`;
 
     const imageHtml = project.project_image_url
       ? `<img src="${escapeHtml(project.project_image_url)}" alt="Gambar ${escapeHtml(project.title)}" class="project-image" style="max-width:100%; border-radius:var(--radius); margin-top:1rem; margin-bottom:1rem;">`
@@ -172,6 +173,12 @@
     `;
 
     detailsElement.innerHTML = completeCardHtml;
+
+    // Trigger animasi slide-in
+    setTimeout(() => {
+      detailsElement.classList.add('in-view');
+    }, 50);
+
     return detailsElement;
   }
 
@@ -198,8 +205,8 @@
         displayPageSection({ showEmpty: true });
       } else {
         gridContainer.innerHTML = '';
-        projectData.forEach(item => {
-          gridContainer.appendChild(buildProjectCardElement(item));
+        projectData.forEach((item, index) => {
+          gridContainer.appendChild(buildProjectCardElement(item, index));
         });
         displayPageSection({ showGrid: true });
       }
