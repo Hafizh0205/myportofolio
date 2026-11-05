@@ -23,12 +23,14 @@ from main.views import (
 app_name = "main"
 
 urlpatterns = [
-    path("", show_main, name="show_main"),
+    # Path utama /projects/ langsung ke show_projects
+    path("", show_projects, name="show_projects"),
     
     path("register/", register, name="register"),
     path("login/", login_user, name="login"),
     path("logout/", logout_user, name="logout"),
 
+    # Experience Routes
     path("experience/", show_experience, name="show_experience"),
     path("experience/add/", create_experience, name="create_experience"),
     path("experience/add-ajax/", create_experience_ajax, name="create_experience_ajax"),
@@ -38,10 +40,10 @@ urlpatterns = [
     path("api/experience/", get_experience_json, name="get_experience_json"),
     path("api/experience/<int:id>/", get_experience_json_by_id, name="get_experience_json_by_id"),
 
-    path("", show_projects, name="show_projects"),
-    path("projects/add/", create_project, name="create_project"),
-    path("projects/add-ajax/", create_project_ajax, name="create_project_ajax"), 
-    path("projects/<uuid:project_id>/star/", toggle_star, name="toggle_star"),
+    # Project Sub-routes (tanpa awalan projects/ lagi)
+    path("add/", create_project, name="create_project"),
+    path("add-ajax/", create_project_ajax, name="create_project_ajax"), 
+    path("<uuid:project_id>/star/", toggle_star, name="toggle_star"),
     path("api/projects/", get_projects_json, name="get_projects_json"),
-    path("projects/<uuid:project_id>/delete/", delete_project, name="delete_project"),
+    path("<uuid:project_id>/delete/", delete_project, name="delete_project"),
 ]
