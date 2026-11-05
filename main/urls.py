@@ -23,8 +23,11 @@ from main.views import (
 app_name = "main"
 
 urlpatterns = [
-    # Path utama /projects/ langsung ke show_projects
+    # Path utama /projects/ langsung menampilkan daftar proyek
     path("", show_projects, name="show_projects"),
+
+    # Path untuk profil (agar {% url 'main:show_main' %} tidak error)
+    path("profile/", show_main, name="show_main"),
     
     path("register/", register, name="register"),
     path("login/", login_user, name="login"),
@@ -40,7 +43,7 @@ urlpatterns = [
     path("api/experience/", get_experience_json, name="get_experience_json"),
     path("api/experience/<int:id>/", get_experience_json_by_id, name="get_experience_json_by_id"),
 
-    # Project Sub-routes (tanpa awalan projects/ lagi)
+    # Project Sub-routes
     path("add/", create_project, name="create_project"),
     path("add-ajax/", create_project_ajax, name="create_project_ajax"), 
     path("<uuid:project_id>/star/", toggle_star, name="toggle_star"),
