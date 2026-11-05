@@ -38,7 +38,7 @@ urlpatterns = [
     path("api/experience/", get_experience_json, name="get_experience_json"),
     path("api/experience/<int:id>/", get_experience_json_by_id, name="get_experience_json_by_id"),
 
-    path("projects/", show_projects, name="show_projects"),
+    path("", show_projects, name="show_projects"),
     path("projects/add/", create_project, name="create_project"),
     path("projects/add-ajax/", create_project_ajax, name="create_project_ajax"), 
     path("projects/<uuid:project_id>/star/", toggle_star, name="toggle_star"),
