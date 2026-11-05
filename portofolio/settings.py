@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'portofolio',
     'main',
     'contacts',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
