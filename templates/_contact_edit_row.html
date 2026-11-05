@@ -1,0 +1,38 @@
+<tr id="contact-{{ contact.id }}">
+  <td>
+    <input type="text"
+           name="name"
+           value="{{ contact.name }}"
+           form="edit-form-{{ contact.id }}"
+           class="project-search_input"
+           style="padding: 0.4rem 0.8rem;"
+           required>
+  </td>
+  <td>
+    <input type="email"
+           name="email"
+           value="{{ contact.email }}"
+           form="edit-form-{{ contact.id }}"
+           class="project-search_input"
+           style="padding: 0.4rem 0.8rem;"
+           required>
+  </td>
+  <td>
+    <form id="edit-form-{{ contact.id }}"
+          hx-put="{% url 'contacts:contact_update' contact.id %}"
+          hx-target="#contact-{{ contact.id }}"
+          hx-swap="outerHTML"
+          style="display: inline;">
+      {% csrf_token %}
+      <button type="submit" class="btn-pill btn-pill-blue" style="padding: 0.4rem 0.8rem;">Simpan</button>
+    </form>
+    <button type="button"
+            class="btn-pill btn-pill-dark"
+            style="padding: 0.4rem 0.8rem;"
+            hx-get="{% url 'contacts:contact_row' contact.id %}"
+            hx-target="#contact-{{ contact.id }}"
+            hx-swap="outerHTML">
+      Batal
+    </button>
+  </td>
+</tr>

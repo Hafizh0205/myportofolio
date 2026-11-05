@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Contacts - HTMX Demo</title>
+<!-- Script HTMX -->
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.11/dist/htmx.min.js"></script>
+{% endblock meta %}
+
+{% block content %}
+<main hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <section class="content-section">
+    <div class="container">
+      <p class="section-kicker">DEMO HYPERMEDIA</p>
+
+      <div class="project-header">
+        <h1 style="margin: 0;">Pengelola Kontak (HTMX)</h1>
+      </div>
+
+<!-- Form Tambah Kontak -->
+      <form hx-post="{% url 'contacts:contact_add' %}"
+            hx-target="#contact-rows"
+            hx-swap="innerHTML"
+            hx-on::after-request="if (event.detail.successful) this.reset()"
+            class="project-form"
+            style="margin-bottom: 2rem; background: var(--card-bg); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--line);">
+        {% csrf_token %}
+        <h3 style="margin-bottom: 1rem; color: var(--ink);">Tambah Kontak Baru</h3>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <input type="text"
+                 name="name"
+                 placeholder="Nama Lengkap"
+                 required
+                 class="project-search_input"
+                 style="flex: 1; min-width: 200px;">
+          <input type="email"
+                 name="email"
+                 placeholder="Alamat Email"
+                 required
+                 class="project-search_input"
+                 style="flex: 1; min-width: 200px;">
+          <button type="submit" class="btn-pill btn-pill-blue">+ Tambah</button>
+        </div>
+      </form>
+      
+      <!-- Live Search HTMX -->
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+        <input type="search"
+               name="q"
+               placeholder="Cari kontak secara langsung..."
+               hx-get="{% url 'contacts:contact_search' %}"
+               hx-trigger="keyup changed delay:300ms, search"
+               hx-target="#contact-rows"
+               hx-indicator="#search-indicator"
+               class="project-search_input"
+               style="flex: 1;">
+        <span id="search-indicator" class="htmx-indicator" style="color: var(--accent-blue); font-size: 0.9rem;">Mencari...</span>
+      </div>
+
+      <!-- Tabel Kontak -->
+      <div style="overflow-x: auto; background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--line); padding: 1rem;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; color: var(--ink);">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--line); color: var(--text-muted);">
+              <th style="padding: 0.75rem 1rem;">Nama</th>
+              <th style="padding: 0.75rem 1rem;">Email</th>
+              <th style="padding: 0.75rem 1rem; width: 180px;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="contact-rows">
+            {% include "_contact_rows.html" %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+</main>
+{% endblock content %}
